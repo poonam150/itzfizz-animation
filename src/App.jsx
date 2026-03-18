@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
@@ -9,9 +10,9 @@ function App() {
   const objectRef = useRef(null);
 
   useEffect(() => {
+    // 1. INITIAL LOAD ANIMATIONS
     const tl = gsap.timeline();
     
-    // Initial Load Animation
     tl.fromTo(".headline span", 
       { opacity: 0, y: 50 }, 
       { opacity: 1, y: 0, stagger: 0.05, duration: 0.8, ease: "power4.out" }
@@ -21,14 +22,13 @@ function App() {
       { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }, 
       "-=0.4"
     )
-    // New: Animate buttons in
     .fromTo(".hero-btn", 
       { opacity: 0, scale: 0.9 }, 
       { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
       "-=0.2"
     );
 
-    // Scroll Animation
+    // 2. SCROLL-DRIVEN ANIMATION
     gsap.to(objectRef.current, {
       x: "105vw",
       opacity: 0,
@@ -46,10 +46,13 @@ function App() {
   return (
     <div className="bg-black text-white min-h-screen w-full overflow-x-hidden selection:bg-white selection:text-black">
       
+      {/* WRAPPER: Scroll Runway */}
       <div ref={containerRef} className="relative h-[300vh] bg-black">
         
+        {/* STICKY SECTION */}
         <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-black overflow-hidden">
           
+          {/* Ambient Background Glow */}
           <div className="absolute inset-0 flex items-center justify-center opacity-10 blur-[120px] pointer-events-none">
              <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-blue-600 rounded-full"></div>
           </div>
@@ -81,12 +84,20 @@ function App() {
             ))}
           </div>
 
-          {/* HERO BUTTONS (Moved here for better visibility) */}
+          {/* UPDATED HERO BUTTONS */}
           <div className="flex flex-row gap-4 mt-12 z-50">
-             <a href="YOUR_GITHUB_LINK_HERE" target="_blank" className="hero-btn px-6 py-2 md:px-10 md:py-3 border border-white/20 hover:bg-white hover:text-black transition-all rounded-full text-[10px] uppercase tracking-widest">
+             <a 
+               href="https://github.com/poonam150/itzfizz-animation" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="hero-btn px-6 py-2 md:px-10 md:py-3 border border-white/20 hover:bg-white hover:text-black transition-all rounded-full text-[10px] uppercase tracking-widest"
+             >
                GitHub
              </a>
-             <a href="YOUR_LIVE_LINK_HERE" target="_blank" className="hero-btn px-6 py-2 md:px-10 md:py-3 bg-white text-black font-bold rounded-full text-[10px] uppercase tracking-widest hover:bg-zinc-200 transition-all">
+             <a 
+               href="https://poonam150.github.io/itzfizz-animation/" 
+               className="hero-btn px-6 py-2 md:px-10 md:py-3 bg-white text-black font-bold rounded-full text-[10px] uppercase tracking-widest hover:bg-zinc-200 transition-all"
+             >
                Live Link
              </a>
           </div>
@@ -106,7 +117,7 @@ function App() {
         </section>
       </div>
 
-      {/* FOOTER SECTION */}
+      {/* FOOTER */}
       <section className="h-[50vh] bg-zinc-950 flex items-center justify-center border-t border-white/5">
         <p className="text-zinc-600 text-xs tracking-[0.5em] uppercase">Built by Poonam • 2026</p>
       </section>
